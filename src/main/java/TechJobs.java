@@ -119,33 +119,20 @@ public class TechJobs {
 
     // Print a list of jobs
     private static void printJobs(ArrayList<HashMap<String, String>> someJobs) {
-
-        String noResultsMessage = "No Results";
-        if (someJobs.isEmpty()) {
-            System.out.println(noResultsMessage);
-            return;
-        }
-
-        for (HashMap<String, String> job : someJobs) {
-            System.out.println("\n*****");
-
-            // Check if the position type is "Other" (case-insensitive)
-            /*String positionType = job.get("position type");
-            if (positionType.equalsIgnoreCase("other")) {
-                System.out.println("position type: Other");
-                System.out.println("name: " + job.get("name"));
-                System.out.println("employer: " + job.get("employer"));
-                System.out.println("location: " + job.get("location"));
-                System.out.println("core competency: " + job.get("core competency"));
-            } else {*/
-                // Print other job details
-                for (Map.Entry<String, String> entry : job.entrySet()) {
+        if (someJobs.size() == 0) {
+            System.out.print("No Results");
+        } else {
+            for (int i = 0; i < someJobs.size(); i++) {
+                System.out.println("\n*****");
+                for (Map.Entry<String, String> entry : someJobs.get(i).entrySet()) {
                     String key = entry.getKey();
                     String value = entry.getValue();
+
+                    // Print key and value (case-insensitive)
                     System.out.println(key + ": " + value);
                 }
+                System.out.println("*****");
             }
-
-            System.out.println("*****");
         }
     }
+}

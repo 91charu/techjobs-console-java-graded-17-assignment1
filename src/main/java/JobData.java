@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
-
+import java.util.Map;
 /**
  * Created by LaunchCode
  */
@@ -25,7 +25,7 @@ public class JobData {
      * without duplicates, for a given column.
      *
      * @param field The column to retrieve values from
-     * @return List of all of the values of the given field
+     * @return List of all  the values of the given field
      */
     public static ArrayList<String> findAll(String field) {
 
@@ -72,11 +72,14 @@ public class JobData {
         ArrayList<HashMap<String, String>> jobs = new ArrayList<>();
 
         for (HashMap<String, String> row : allJobs) {
+            for (Map.Entry<String, String> entry : row.entrySet()) {
+                String key = entry.getKey();
+                String aValue = row.get(column);
 
-            String aValue = row.get(column);
-
-            if (aValue.contains(value)) {
-                jobs.add(row);
+                if (key.equalsIgnoreCase(column) && aValue.toLowerCase().contains(value.toLowerCase())) {
+                    jobs.add(row);
+                    break;
+                }
             }
         }
 
@@ -90,14 +93,24 @@ public class JobData {
      * @return      List of all jobs with at least one field containing the value
      */
     public static ArrayList<HashMap<String, String>> findByValue(String value) {
-
         // load data, if not already loaded
         loadData();
 
-        // TODO - implement this method
-        return null;
-    }
+        ArrayList<HashMap<String, String>> jobs = new ArrayList<>();
 
+        for (HashMap<String, String> row : allJobs) {
+            for (Map.Entry<String, String> entry : row.entrySet()) {
+                String columnValue = entry.getValue();
+
+                if (columnValue.toLowerCase().contains(value.toLowerCase())) {
+                    jobs.add(row);
+                    break;
+                }
+            }
+        }
+
+        return jobs;
+    }
     /**
      * Read in data from a CSV file and store it in a list
      */
