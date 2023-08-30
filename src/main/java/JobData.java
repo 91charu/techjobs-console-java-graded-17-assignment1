@@ -99,13 +99,19 @@ public class JobData {
         ArrayList<HashMap<String, String>> jobs = new ArrayList<>();
 
         for (HashMap<String, String> row : allJobs) {
+            boolean found = false;
+
             for (Map.Entry<String, String> entry : row.entrySet()) {
                 String columnValue = entry.getValue();
 
                 if (columnValue.toLowerCase().contains(value.toLowerCase())) {
-                    jobs.add(row);
-                    break;
+                    found = true;
+                    break; // No need to check other columns in this row
                 }
+            }
+
+            if (found) {
+                jobs.add(row);
             }
         }
 
