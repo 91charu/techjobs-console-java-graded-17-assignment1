@@ -128,7 +128,6 @@ public class TechJobs {
                     String key = entry.getKey();
                     String value = entry.getValue();
 
-                    // Print key and value (case-insensitive)
                     System.out.println(key + ": " + value);
                 }
                 System.out.println("*****");
